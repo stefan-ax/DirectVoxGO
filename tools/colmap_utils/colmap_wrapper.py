@@ -33,7 +33,7 @@ def run_colmap(basedir, match_type):
             '--ImageReader.single_camera', '1',
             # '--SiftExtraction.use_gpu', '0',
     ]
-    feat_output = ( subprocess.check_output(feature_extractor_args, universal_newlines=True) )
+    feat_output = ( subprocess.check_output(feature_extractor_args, universal_newlines=True, shell=True) )
     logfile.write(feat_output)
     print('Features extracted')
 
@@ -42,7 +42,7 @@ def run_colmap(basedir, match_type):
             '--database_path', os.path.join(basedir, 'database.db'), 
     ]
 
-    match_output = ( subprocess.check_output(exhaustive_matcher_args, universal_newlines=True) )
+    match_output = ( subprocess.check_output(exhaustive_matcher_args, universal_newlines=True, shell=True) )
     logfile.write(match_output)
     print('Features matched')
     
@@ -69,7 +69,7 @@ def run_colmap(basedir, match_type):
             '--Mapper.extract_colors', '0',
     ]
 
-    map_output = ( subprocess.check_output(mapper_args, universal_newlines=True) )
+    map_output = ( subprocess.check_output(mapper_args, universal_newlines=True, shell=True) )
     logfile.write(map_output)
     print('Sparse map created')
 
@@ -80,7 +80,7 @@ def run_colmap(basedir, match_type):
         '--output_path', os.path.join(basedir, 'dense'),
         '--output_type', 'COLMAP',
     ]
-    undistort_output = subprocess.check_output(undistorter, universal_newlines=True)
+    undistort_output = subprocess.check_output(undistorter, universal_newlines=True, shell=True)
     logfile.write(undistort_output)
     print('Undistort images')
 

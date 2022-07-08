@@ -4,6 +4,7 @@ import os
 import sys
 import imageio
 import skimage.transform
+import shutil
 
 from .colmap_wrapper import run_colmap
 from . import colmap_read_model as read_model
@@ -129,7 +130,10 @@ def minify(basedir, factors=[], resolutions=[]):
         print('Minifying', r, basedir)
 
         os.makedirs(imgdir)
-        check_output('cp {}/* {}'.format(imgdir_orig, imgdir), shell=True)
+        if sys.platform in ['linux', 'linux2', 'darwin']:
+            check_output('cp {}/* {}'.format(imgdir_orig, imgdir), shell=True)
+        elif sys.platform == 'win32':
+            shutil.copytree(f'{imgdir_orig}', imgdir, dirs_exist_ok=True)
 
         ext = imgs[0].split('.')[-1]
         args = ' '.join(['mogrify', '-resize', resizearg, '-format', 'png', '*.{}'.format(ext)])

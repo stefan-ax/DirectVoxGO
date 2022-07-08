@@ -8,3 +8,5 @@ imageio-ffmpeg
 opencv-python
 torch_efficient_distloss
 scikit-image
+einops
+torch_scatter

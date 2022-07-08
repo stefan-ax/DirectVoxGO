@@ -12,7 +12,7 @@ def check_structure(scenedir):
         print('Invalid directory structure.')
         print('Please put all your images under', source, '!')
         sys.exit()
-    if len(glob.glob(f'{source}/*[JPG\|jpg\|png\|jpeg\|PNG]')) == 0:
+    if len(glob.glob(f'{source}/*[JPG|jpg|png|jpeg|PNG]')) == 0:
         print('Invalid directory structure.')
         print('No image in', source, '!')
         sys.exit()
