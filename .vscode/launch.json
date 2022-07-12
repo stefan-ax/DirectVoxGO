@@ -5,23 +5,34 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "Python: Run Custom Scene",
             "type": "python",
             "request": "launch",
             "program": "run.py",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["--config", "configs/custom/OwnLego.py"]
+            "args": [
+                "--config",
+                "configs/custom/Venus1.py"
+            ]
         },
         {
             "name": "Python: COLMAP",
             "type": "python",
             "request": "launch",
-            "program": "tools\\imgs2poses.py",
+            "program": "tools/imgs2poses.py",
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": [
-                ".\\data\\custom\\lego-custom\\"
+                "./data/custom/venus-rough-1/"
             ]
         }
     ]

@@ -130,20 +130,21 @@ def minify(basedir, factors=[], resolutions=[]):
         print('Minifying', r, basedir)
 
         os.makedirs(imgdir)
-        if sys.platform in ['linux', 'linux2', 'darwin']:
-            check_output('cp {}/* {}'.format(imgdir_orig, imgdir), shell=True)
-        elif sys.platform == 'win32':
-            shutil.copytree(f'{imgdir_orig}', imgdir, dirs_exist_ok=True)
+        # if sys.platform in ['linux', 'linux2', 'darwin']:
+        #     check_output('cp {}/* {}'.format(imgdir_orig, imgdir))
+        # elif sys.platform == 'win32':
+        shutil.copytree(f'{imgdir_orig}', imgdir, dirs_exist_ok=True)
 
         ext = imgs[0].split('.')[-1]
         args = ' '.join(['mogrify', '-resize', resizearg, '-format', 'png', '*.{}'.format(ext)])
         print(args)
         os.chdir(imgdir)
-        check_output(args, shell=True)
+        os.system(' '.join(args))
+        # check_output(args)
         os.chdir(wd)
 
         if ext != 'png':
-            check_output('rm {}/*.{}'.format(imgdir, ext), shell=True)
+            check_output('rm {}/*.{}'.format(imgdir, ext))
             print('Removed duplicates')
         print('Done')
 
