@@ -13,7 +13,7 @@
             "justMyCode": true
         },
         {
-            "name": "Python: Run Custom Scene",
+            "name": "Python: Run Lego",
             "type": "python",
             "request": "launch",
             "program": "run.py",
@@ -21,7 +21,7 @@
             "justMyCode": true,
             "args": [
                 "--config",
-                "configs/custom/Venus1.py"
+                "configs/custom/OwnLego.py"
             ]
         },
         {
