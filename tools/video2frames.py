@@ -8,10 +8,16 @@ from PIL import Image
 import io
 import tqdm
 
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
+
 def remove_bg(filepath):
     image = np.fromfile(filepath)
     result = remove(image)
-    img = Image.open(io.BytesIO(result)).convert("RGBA")
+    if filepath[-3:] == 'png':
+        img = Image.open(io.BytesIO(result)).convert("RGBA")
+    else:
+        img = Image.open(io.BytesIO(result)).convert("RGB")
     img.save(filepath)
 
 basedir = "data/custom/venus-rough-1"
@@ -37,7 +43,8 @@ while(video.isOpened()):
     
     # _ = cv2.imwrite(os.path.join(basedir, 'source/', video_name[:-4]) + f'_{i}.png', frame, )
     _ = cv2.imwrite(os.path.join(basedir, 'source/' + f'r_{i}.png') , frame, )
-    _ = cv2.imwrite(os.path.join(basedir, 'source_jpg/', video_name[:-4]) + f'_{i}.jpg', frame, )
+    # _ = cv2.imwrite(os.path.join(basedir, 'source_jpg/', video_name[:-4]) + f'_{i}.jpg', frame, )
+    _ = cv2.imwrite(os.path.join(basedir, 'source_jpg/' + f'r_{i}.jpg') , frame, )
     
     i += 1
 
@@ -45,5 +52,6 @@ print("Step 2: Removing background")
 for j in tqdm.tqdm(range(i)):
     # remove_bg(os.path.join(basedir, 'source/', video_name[:-4]) + f'_{j}.png')
     remove_bg(os.path.join(basedir, 'source/' + f'r_{j}.png'))
+    remove_bg(os.path.join(basedir, 'source_jpg/' + f'r_{j}.jpg'))
 
 print("DONE")
